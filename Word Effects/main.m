@@ -10,8 +10,31 @@
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        // insert code here...
-        NSLog(@"Hello, World!");
+        // 255 unit long array of characters
+        char inputChars[255];
+        
+        printf("Please give me a string to work with: ");
+        // limit input to max 255 characters
+        fgets(inputChars, 255, stdin);
+
+// print as a c string
+//printf("Your string is %s\n", inputChars);
+        
+        // convert char array to an NSString object
+        NSString *inputString = [NSString stringWithUTF8String:inputChars];
+        
+// print NSString object
+//NSLog(@"Input was: %@", inputString);
+        
+        NSString * options = @"\n1. Uppercase\n2. Lowercase\n3. Numberize\n4. Canadianize\n5. Respond\n6. De-Space-It\n";
+        NSLog(@"\nWhat would you like me to do with your string? Please type in one of these numbers:\n %@", options);
+       
+        //Get option
+        char option;
+        option = getchar( );
+        
+        NSLog(@"\nYou picked option #%c",option);
+        
+        return 0;
     }
-    return 0;
 }
