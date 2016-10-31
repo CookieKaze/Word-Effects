@@ -39,8 +39,22 @@ int main(int argc, const char * argv[]) {
       
         
         if (convertedOption == 1){
-            NSString *lower = [inputString uppercaseString];
+            NSString *upper = [inputString uppercaseString];
+            NSLog(@"\nYour new string is: %@", upper);
+        } else if (convertedOption == 2) {
+            NSString *lower = [inputString lowercaseString];
             NSLog(@"\nYour new string is: %@", lower);
+        } else if (convertedOption == 3) {
+            int a = [inputString intValue];
+            if (a == 0){
+                NSLog(@"\nYou did not enter a number");
+            } else {
+                NSLog(@"\nYour new string is: %d", a);
+            }
+        } else if (convertedOption == 4) {
+            NSString * noReturn = [inputString substringToIndex:[inputString length] - 1];
+            NSString *newString = [NSString stringWithFormat: @"%@, eh?", noReturn];
+            NSLog(@"\nYour new string is: %@", newString);
         }
 //        return 0;
     }
