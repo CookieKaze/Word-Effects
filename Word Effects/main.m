@@ -34,26 +34,37 @@ int main(int argc, const char * argv[]) {
         option = getchar( );
         NSString *objectOption = [NSString stringWithUTF8String:&option];
         int convertedOption= [objectOption intValue];
-        
+        NSString *finalString = [inputString substringToIndex:[inputString length] - 1];
         
       
         
         if (convertedOption == 1){
-            NSString *upper = [inputString uppercaseString];
+            NSString *upper = [finalString uppercaseString];
             NSLog(@"\nYour new string is: %@", upper);
         } else if (convertedOption == 2) {
-            NSString *lower = [inputString lowercaseString];
+            NSString *lower = [finalString lowercaseString];
             NSLog(@"\nYour new string is: %@", lower);
         } else if (convertedOption == 3) {
-            int a = [inputString intValue];
+            int a = [finalString intValue];
             if (a == 0){
                 NSLog(@"\nYou did not enter a number");
             } else {
                 NSLog(@"\nYour new string is: %d", a);
             }
         } else if (convertedOption == 4) {
-            NSString * noReturn = [inputString substringToIndex:[inputString length] - 1];
-            NSString *newString = [NSString stringWithFormat: @"%@, eh?", noReturn];
+            NSString *newString = [NSString stringWithFormat: @"%@, eh?", finalString];
+            NSLog(@"\nYour new string is: %@", newString);
+        } else if (convertedOption == 5) {
+            NSString *end=[finalString substringFromIndex:MAX((int)[finalString length]-1, 0)];
+            //NSString *begin = [finalString substringToIndex:1];
+            
+            if ([end  isEqual: @"?"]) {
+                NSLog(@"I don't know.");
+            } else if ([end  isEqual: @"!"]) {
+                NSLog(@"Whoa, calm down!");
+            }
+        } else if (convertedOption == 6) {
+            NSString *newString = [finalString stringByReplacingOccurrencesOfString:@" " withString:@"-"];
             NSLog(@"\nYour new string is: %@", newString);
         }
 //        return 0;
