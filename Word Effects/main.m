@@ -32,9 +32,16 @@ int main(int argc, const char * argv[]) {
         //Get option
         char option;
         option = getchar( );
+        NSString *objectOption = [NSString stringWithUTF8String:&option];
+        int convertedOption= [objectOption intValue];
         
-        NSLog(@"\nYou picked option #%c",option);
         
-        return 0;
+      
+        
+        if (convertedOption == 1){
+            NSString *lower = [inputString uppercaseString];
+            NSLog(@"\nYour new string is: %@", lower);
+        }
+//        return 0;
     }
 }
