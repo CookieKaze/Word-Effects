@@ -10,63 +10,58 @@
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        // 255 unit long array of characters
-        char inputChars[255];
-        
-        printf("Please give me a string to work with: ");
-        // limit input to max 255 characters
-        fgets(inputChars, 255, stdin);
-
-// print as a c string
-//printf("Your string is %s\n", inputChars);
-        
-        // convert char array to an NSString object
-        NSString *inputString = [NSString stringWithUTF8String:inputChars];
-        
-// print NSString object
-//NSLog(@"Input was: %@", inputString);
-        
-        NSString * options = @"\n1. Uppercase\n2. Lowercase\n3. Numberize\n4. Canadianize\n5. Respond\n6. De-Space-It\n";
-        NSLog(@"\nWhat would you like me to do with your string? Please type in one of these numbers:\n %@", options);
-       
-        //Get option
-        char option;
-        option = getchar( );
-        NSString *objectOption = [NSString stringWithUTF8String:&option];
-        int convertedOption= [objectOption intValue];
-        NSString *finalString = [inputString substringToIndex:[inputString length] - 1];
-        
-      
-        
-        if (convertedOption == 1){
-            NSString *upper = [finalString uppercaseString];
-            NSLog(@"\nYour new string is: %@", upper);
-        } else if (convertedOption == 2) {
-            NSString *lower = [finalString lowercaseString];
-            NSLog(@"\nYour new string is: %@", lower);
-        } else if (convertedOption == 3) {
-            int a = [finalString intValue];
-            if (a == 0){
-                NSLog(@"\nYou did not enter a number");
-            } else {
-                NSLog(@"\nYour new string is: %d", a);
+        while (true) {
+            char inputChars[255];
+            // Get the string
+            NSLog(@"Please give me a string to work with: ");
+            fgets(inputChars, 255, stdin);
+            if(inputChars[0] == '\n'){
+                fgets(inputChars, 255, stdin);
             }
-        } else if (convertedOption == 4) {
-            NSString *newString = [NSString stringWithFormat: @"%@, eh?", finalString];
-            NSLog(@"\nYour new string is: %@", newString);
-        } else if (convertedOption == 5) {
-            NSString *end=[finalString substringFromIndex:MAX((int)[finalString length]-1, 0)];
-            //NSString *begin = [finalString substringToIndex:1];
+            inputChars[strcspn(inputChars, "\n")] = 0;
+            NSString *inputString = [NSString stringWithUTF8String:inputChars];
             
-            if ([end  isEqual: @"?"]) {
-                NSLog(@"I don't know.");
-            } else if ([end  isEqual: @"!"]) {
-                NSLog(@"Whoa, calm down!");
+            // Get the option
+            NSLog(@"What would you like me to do with your string?");
+            NSLog(@"1. Uppercase");
+            NSLog(@"2. Lowercase");
+            NSLog(@"3. Numberize");
+            NSLog(@"4. Canadianize");
+            NSLog(@"5. Respond");
+            NSLog(@"6. De-Space-It");
+            int option;
+            scanf("%d", &option);
+            
+            
+            // Print the result
+            if (option == 1){
+                NSString *upper = [inputString uppercaseString];
+                NSLog(@"\nYour new string is: %@", upper);
+            } else if (option == 2) {
+                NSString *lower = [inputString lowercaseString];
+                NSLog(@"\nYour new string is: %@", lower);
+            } else if (option == 3) {
+                int a = [inputString intValue];
+                if (a == 0){
+                    NSLog(@"\nYou did not enter a number");
+                } else {
+                    NSLog(@"\nYour number is: %d", a);
+                }
+            } else if (option == 4) {
+                NSString *newString = [NSString stringWithFormat: @"%@, eh?", inputString];
+                NSLog(@"\nYour new string is: %@", newString);
+            } else if (option == 5) {
+                NSString *end=[inputString substringFromIndex:MAX((int)[inputString length]-1, 0)];
+                if ([end  isEqual: @"?"]) {
+                    NSLog(@"I don't know.");
+                } else if ([end  isEqual: @"!"]) {
+                    NSLog(@"Whoa, calm down!");
+                }
+            } else if (option == 6) {
+                NSString *newString = [inputString stringByReplacingOccurrencesOfString:@" " withString:@"-"];
+                NSLog(@"\nYour new string is: %@", newString);
             }
-        } else if (convertedOption == 6) {
-            NSString *newString = [finalString stringByReplacingOccurrencesOfString:@" " withString:@"-"];
-            NSLog(@"\nYour new string is: %@", newString);
         }
-//        return 0;
+        return 0;
     }
 }
